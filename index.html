@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Lämpötila- ja kosteusmittari</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="index.css">
+	<!-- Bootstrap? -->
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+	<script>
+function startTime() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+    document.getElementById('txt').innerHTML =
+    h + ":" + m ;
+    var t = setTimeout(startTime, 500);
+}
+function checkTime(i) {
+    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+}
+</script>
+
+</head>
+<body onload="startTime()">
+	<nav>
+		<h1>Kodin reaaliaikainen sääasema, Lintuvaara</h1>
+	</nav>
+
+
+
+	<div align="center">
+		<!-- Kellonaika -->
+		<div id="txt"></div>
+
+		<!-- Lämpötilakuvaaja -->
+		<iframe src="https://thingspeak.com/channels/481478/charts/1?average=240&bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&round=0&title=L%C3%A4mp%C3%B6tila%28%E2%84%83%29&type=line&xaxis=Aika&yaxis=L%C3%A4mp%C3%B6tila%28%E2%84%83%29"></iframe>
+
+		<!-- Kosteuskuvaaja -->
+		<iframe src="https://thingspeak.com/channels/481478/charts/2?average=240&bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&round=0&title=Ilmankosteus%28%25%29&type=line&xaxis=Aika&yaxis=Kosteus%28%25%29"></iframe>
+
+		<!-- Sadetilanteen kuvaaja -->
+		<iframe src="https://thingspeak.com/channels/481478/charts/3?average=240&bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&round=0&title=Sadetilanne%281024%3Dei+sada%2C+0%3Dsataa%29&type=column&xaxis=Aika&yaxis=Sadetilanne&yaxismax=1000"></iframe>
+
+		<!-- Kartta -->
+		<iframe src="https://thingspeak.com/channels/481478/maps/channel_show"></iframe>
+
+	</div>
+	<p>Tästä <a href="https://www.foreca.fi/Finland/Espoo/Lintuvaara/10vrk">linkistä</a> löydät Forecan 10 vrk sääennusteen alueelle.</p>
+
+	<p>Mitattu käyttäen NodeMCU 1.0, DHT11-sensoria ja Fc-37-sensoria. Tehty osana Haukilahden lukion teknologiakurssia toukokuussa vuonna 2018. Sensorit keräävät dataa, ja langattomaan nettiin yhdistetty NodeMCU lataa datan <a href="https://thingspeak.com" target="_blank">Thingspeak</a>-sivustolle. Thingspeakista data ohjautuu iframeilla nettisivulle.</p>
+
+	<footer>
+		Tuomas Nummela 2018
+	</footer>
+
+
+</body>
+</html>

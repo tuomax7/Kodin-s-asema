@@ -2,8 +2,8 @@
 #include <ESP8266WiFi.h>
 const int analogInPin = A0;
 String apiKey = "C2J6BGG7EKMUWGOY";
-const char* ssid = "Verkko-3";
-const char* password = "lintuvaara";
+const char* ssid = "";
+const char* password = "";
 
 const char* server = "api.thingspeak.com";
 
